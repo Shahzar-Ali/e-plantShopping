@@ -3,16 +3,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  /* Removed overflow: hidden from here to avoid clipping content globally */
 }
 
+/* Root container */
 .landing-page {
   position: relative;
   width: 100vw;
   height: 100vh;
   background-color: #f8f8f8;
+  overflow: hidden; /* limit scroll inside landing page if needed */
 }
 
+/* Background image fills container */
 .background-image {
   position: absolute;
   top: 0;
@@ -20,29 +23,34 @@
   width: 100%;
   height: 100%;
   background-image: url('https://cdn.pixabay.com/photo/2017/07/13/08/59/greenhouse-2499758_1280.jpg');
-  background-size: 100% 100%;
+  background-size: cover; /* maintain aspect ratio */
   background-position: center;
   filter: brightness(0.8);
+  z-index: 0;
 }
+
+/* Content container overlays background */
 .content {
+  position: relative; /* changed from static to relative */
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
- top: 100px;
   backdrop-filter: blur(4px);
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   gap: 20px;
+  z-index: 1;
+  /* Removed top: 100px, flex centering handles layout */
 }
 
+/* Centered content box */
 .landing_content {
- margin-top: 430px;
-  margin-left: 100px;
-  transform: translate(-50%, -50%);
+  /* margin-top and margin-left removed for better centering */
+  position: relative;
+  transform: translate(0, 0); /* removed translate(-50%, -50%) which conflicted with margins */
   z-index: 1;
   text-align: center;
-  /* background-color: red; */
   width: 400px;
   height: 400px;
   display: flex;
@@ -50,8 +58,10 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  color: white;
 }
 
+/* Text styles inside content */
 .content p,
 .content h1 {
   color: white;
@@ -66,6 +76,7 @@
   font-size: 25px;
 }
 
+/* Green divider bar */
 .divider {
   width: 50px;
   height: 2px;
@@ -73,6 +84,7 @@
   margin: 10px 0;
 }
 
+/* Button styling */
 .get-started-button {
   padding: 15px 25px;
   font-size: 23px;
@@ -90,30 +102,25 @@
 }
 
 /* ProductList.css */
-
 .product-list-container {
   position: absolute;
   overflow-x: hidden;
-  top: 100vh;
-  /* Initially off-screen */
+  top: 100vh; /* initially off-screen */
   left: 0;
   width: 100%;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.9);
-  /* Adjust background opacity as needed */
   transition: top 0.5s ease;
-  /* Smooth transition for top property */
   overflow-y: auto;
-  /* Enable vertical scrolling */
   z-index: 2;
-  /* Ensure it's above landing page content */
   backdrop-filter: blur(5px);
 }
 
 .product-list-container.visible {
   top: 0;
 }
-/* LandingPage.css */
+
+/* Responsive styles */
 @media screen and (max-width: 768px) {
   .content {
     flex-direction: column;
@@ -123,25 +130,25 @@
   }
 
   .landing_content {
-    margin-top: 100px; /* Adjust as needed */
-    margin-left: 0;
-    width: 80%; /* Adjust as needed */
+    margin-top: 100px; /* spacing below nav if any */
+    width: 80%;
+    height: auto; /* allow flexible height */
     text-align: center;
   }
 
   .aboutus_container {
-    margin-top: 20px; /* Adjust as needed */
-    width: 80%; /* Adjust as needed */
+    margin-top: 20px;
+    width: 80%;
   }
 }
 
 @media screen and (max-width: 480px) {
   .landing_content {
-    margin-top: 50px; /* Adjust as needed */
-    width: 90%; /* Adjust as needed */
+    margin-top: 50px;
+    width: 90%;
   }
 
   .aboutus_container {
-    width: 90%; /* Adjust as needed */
+    width: 90%;
   }
 }
