@@ -353,23 +353,17 @@ function ProductList({ onHomeClick }) {
                 </svg>
 
                 {/* Item count badge */}
-                {totalItems > 0 && (
+                {totalItems > 0 ? (
                   <span
-                    style={{
-                      position: "absolute",
-                      top: "0",
-                      right: "0",
-                      background: "red",
-                      color: "white",
-                      borderRadius: "50%",
-                      padding: "4px 8px",
-                      fontSize: "14px",
-                      fontWeight: "bold",
-                    }}
+                    className="cart-btn"
                   >
                     {totalItems}
                   </span>
-                )}
+                ): ( <span
+                    className="cart-btn"
+                  >
+                    0
+                  </span>)}
               </h1>
             </a>
           </div>
